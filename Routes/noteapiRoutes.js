@@ -6,15 +6,26 @@ const { uuid } = require('uuidv4');
 const router = express.Router();
 
 
+// router.get('/notes', async (req, res) => {
+//     try {
+//       const notes = fs.readFileSync('../Develop/db/db.json', 'utf8');
+//       res.json(JSON.parse(notes));
+//     } catch (error) {
+//       console.error('Error reading the database file:', error);
+//       res.status(500).json({ error: 'Failed to retrieve notes.' });
+//     }
+//   });
 router.get('/notes', async (req, res) => {
     try {
-      const notes = fs.readFileSync('../Develop/db/db.json', 'utf8');
+      const notesPath = path.join(__dirname, '../Develop/db/db.json');
+      const notes = fs.readFileSync(notesPath, 'utf8');
       res.json(JSON.parse(notes));
     } catch (error) {
       console.error('Error reading the database file:', error);
       res.status(500).json({ error: 'Failed to retrieve notes.' });
     }
   });
+  
   
   router.post('/notes', async (req, res) => {
     try {
